@@ -5,8 +5,8 @@
   "author": "clicklead",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/FilippovAM/clicklead-team-ui"
+    "type": "git",
+    "url": "https://github.com/FilippovAM/clicklead-team-ui"
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
