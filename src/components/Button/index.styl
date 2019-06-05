@@ -1,0 +1,240 @@
+// colors
+$gray = 0
+$gray_hover = 0
+$gray_color = 0
+$gray_light = #E3E7EE
+$gray_light_hover = #E3E7EE
+
+$blue = #4989FF
+$blue_hover = #5B95FF
+$blue_color = #4989FF
+$blue_light = #B6D0FF
+$blue_light_hover = #F2F6FF
+
+$violet = #BD7CFF
+
+
+// common
+$margin = 24px
+$borderRadius = 4px
+transition()
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+// icon
+// icon
+.btu__icon
+  font-size: 24px
+  *
+    fill: #F0F2F6
+    stroke: #BEC6D7
+    transition()
+  &:hover
+    *
+      fill: #DDE8FF
+      stroke: #A0BEF5
+
+.active
+  .btu__icon
+    *
+      fill: #C5D9FF
+      stroke: #5B95FF
+
+.btu__icon-loading
+  animation: spin 1s infinite linear;
+  *
+    fill: #cacdd1
+
+// button, btu__button
+.btu__button
+  height: 40px;
+  border: 1px solid $blue_light;
+  box-sizing: border-box;
+  border-radius: $borderRadius
+  padding: 0 24px;
+  background-color: #fff;
+  color: $blue_color;
+  outline: 0;
+  cursor: pointer;
+  transition()
+  line-height: 38px;
+  letter-spacing: 0.02em;
+  &:hover
+  &.btu__button-trigger-hover
+    background-color: $blue_light_hover;
+
+  &.btu__button-rounded
+    border-radius: 20px
+  &+.btu__button
+    margin-left: $margin
+
+  &.btu__button-violet
+  &.btu__button-violet.btu__button-only-icon
+    color: $violet
+    border-color: $violet
+    &:hover
+      background-color: #F8F2FF
+
+  &.btu__button-with-icon
+    padding-left: 12px
+    &.btu__button-rounded
+      padding-left: 16px
+
+  &:disabled
+    background-color: #fff
+    border-color: #E8EAED
+    color: #C7CBD4
+    pointer-events: none
+
+a.btu__button
+  display: block;
+  color: #fff
+
+.btu__button-only-icon
+  width: 40px
+  padding: 0
+  text-align: center;
+  border-color: $gray_light
+  background-color: #fff
+  font-size: 16px;
+  &:hover
+    background-color: #fff
+    .btu__icon
+      *
+        fill: #DDE8FF
+        stroke: #A0BEF5
+
+// delete
+.btu__button-delete
+  background-color: #fff
+  border-color: #FF9DA9
+  color: #FF4D63
+  .btu__icon
+    pointer-events: none;
+    *
+      stroke: #FF4D63 !important
+      fill: #FFD3D9 !important
+  &:hover
+    background-color: #FFEDEF
+
+
+.btu__button-primary
+  background-color: $blue
+  border-color: $blue
+  color: #fff
+  &:hover
+    background-color: $blue_hover
+  .btu__icon
+    pointer-events: none;
+
+.btu__button-primary
+  svg
+    *
+      fill: transparent !important
+      stroke: #fff !important
+
+// colors
+.btu__button-orange
+  color: #FFA720
+  border-color: #FFCF84
+  &:hover
+    background-color: #FFF6E9
+    color: #FFA720
+
+.btu__button-green
+  color: #67CD17
+  border-color: #ACE380
+  &:hover
+    background-color: #F0FAE8
+    color: #67CD17
+
+
+.btu__button-primary
+  .btu__icon-loading
+    *
+      fill: #fff
+
+@keyframes spin
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
+
+.btu__button-only-icon svg,
+.btu__button-with-icon .btu__button-icon
+    margin-top: 7px
+    margin-right: 8px
+    line-height: 30px;
+
+.btu__button-icon
+  float: left
+
+.btu__button-only-icon
+  svg
+    margin-right: 0
+
+.btu__button-small
+  font-size: 10px;
+  display: inline-block;
+  height: 24px;
+  line-height: 22px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0 8px;
+  font-size: 10px !important
+  display: inline-block !important
+  line-height: 22px !important
+
+// btn group
+.btn-group
+  .btu__button
+    margin: 0
+    border-radius: 0
+    &:first-child
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+    &:last-child
+      border-bottom-right-radius: 4px;
+      border-top-right-radius: 4px;
+    svg
+      fill: red
+  .btu__button + .btu__button
+    margin-left: -1px
+
+.btn-group
+  .btu__button
+    position: relative;
+    svg
+      position: relative;
+      z-index: 2
+      pointer-events: none;
+      margin-right: 0
+    &:after
+      height: 40px;
+      width: 40px;
+      content: '';
+      position: absolute;
+      background-color: #fff
+      left: 0
+      top: 0
+      z-index: 1;
+      opacity: 0;
+      border-radius: 4px;
+      border: 1px solid #e3e7ee
+      transition: all .2s;
+    &:hover
+      &:after
+        opacity: 1
+        height: 44px;
+        width: 44px;
+        left: -3px;
+        top: -3px;
+    &.active
+      background-color: #EDF3FF
+      border-color: #D2E2FF
+      z-index: 1;
+      &:after
+        display: none;
+  h4 + .btu__button
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+  h4
+    span
+      color: #4989FF

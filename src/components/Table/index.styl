@@ -1,0 +1,284 @@
+.ant-table-wrapper
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 5px;
+  margin: -5px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  &:before
+    content: '';
+    position: absolute;
+    height: 48px;
+    background-color: #fff;
+    border-bottom: 1px solid #f0f1f3;
+    display: block;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    z-index: 1;
+    border-top-left-radius: 6px
+    border-top-right-radius: 6px
+  *
+    font-size: 13px
+    line-height: 16px
+
+  .ant-spin-nested-loading
+    position: static;
+    flex: 0 1 auto
+    shadow()
+    background-color: #fff
+    overflow-y: auto;
+    border-radius: 6px
+    margin-bottom: 56px
+
+  .ant-spin-container
+    position: static;
+
+  .ant-pagination
+    margin: 0;
+    position: absolute;
+    bottom: 0
+
+  .ant-table-thead
+    tr
+      th
+        padding: 0
+        border: 0
+        background: transparent
+        > div
+          position: fixed
+          padding: 16px 24px
+          line-height: 16px;
+          z-index: 2
+          font-size: 10px
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: #515967;
+          font-weight: bold;
+
+  .ant-table-tbody
+    tr
+      border-bottom: 1px dashed #E8EAED
+      &:first-child
+        td
+          padding-top: 64px
+      &:last-child
+        border-bottom: 0
+      td
+        padding: 16px 24px
+        border: 0
+        background-color: #fff !important
+
+.ant-table-column-sorters
+  &:before
+    display: none;
+
+body .ant-table-thead > tr > th
+  .ant-table-column-sorter
+    top: 23px
+    > i
+      display: block;
+      height: auto;
+      line-height: initial;
+      height: 4px;
+      opacity: 0.3;
+      &.on
+        opacity: 1;
+        color: #408eff
+        pointer-events: none;
+
+// table pagination
+.ant-pagination
+  &:before
+    content: ''
+    width: 16px;
+    height: 1px
+    background-color:  #E8EAED;
+    position: absolute;
+    top: 16px
+    left: 88px
+
+.ant-pagination-prev,
+.ant-pagination-next
+  position: absolute;
+  left: 0
+
+body .ant-pagination .ant-pagination-prev a,
+body .ant-pagination .ant-pagination-next a
+  border-radius: 100%
+  border: 1px solid #E8EAED;
+  box-sizing: border-box;
+  background-color: transparent
+  line-height: 32px;
+
+body .ant-pagination .ant-pagination-item
+  all: unset;
+  display: inline-block;
+  margin-right: 8px
+  &.ant-pagination-item-1
+    margin-left: 120px
+  &.ant-pagination-item-active
+    a
+      background-color: #538FFF !important
+      color: #fff !important
+  &:hover
+    a
+      background-color: #eaeaea
+      color: inherit;
+  a
+    border-radius: 100%
+    box-sizing: border-box;
+    background-color: transparent
+    display: block;
+    width: 32px;
+    line-height: @width
+    text-align: center;
+    margin: 0
+
+.ant-pagination-next
+  left: 40px
+
+.ant-table-placeholder
+  margin-top: 48px
+  padding: 0
+  border: 0
+  color: $color-light
+  padding: 16px 0;
+
+.ant-table-spin-holder
+.ant-spin-blur:after
+  display: none;
+
+.ant-spin-blur
+  all: unset
+
+
+.ant-spin-container.ant-spin-blur
+  display: none;
+
+.ant-table-wrapper:before
+  display: none
+
+.ant-spin-container:before
+  content: '';
+  position: absolute;
+  height: 48px;
+  background-color: #fff;
+  border-bottom: 1px solid #f0f1f3;
+  display: block;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  z-index: 1;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+.ant-spin-nested-loading > div > .ant-spin
+  position: absolute;
+  background: #fff
+  width: auto;
+  left: 5px;
+  right: 5px;
+  max-height: none;
+  top: 5px;
+  bottom: 56px;
+  height: auto;
+  shadow()
+  border-radius: 6px
+
+
+.table__actions,
+.table__actions > div,
+.table__actions > div > span
+  display: flex;
+  align-items: center;
+
+.table__actions
+  > *
+    margin-left: 8px
+    &:first-child
+      margin-left: auto
+  svg
+    cursor: pointer;
+    path
+      fill: #fff
+
+.table__copy
+  height: 24px
+  margin-right: 8px
+  cursor: pointer;
+  svg
+    rect
+    path
+      fill: #fff
+  &:hover
+    svg
+      rect
+      path
+        stroke: #4989FF
+
+
+.table__link-black
+  color: $color
+  svg
+    margin-right: 8px
+  &:hover
+    color: #4989FF
+    svg
+      path
+        stroke: #4989FF
+
+.ant-table-wrapper
+  p:last-child
+    margin-bottom: 0
+
+
+
+//
+// fff
+.table__static
+  .ant-table-thead tr th > div
+    position: static;
+  .ant-spin-container.ant-spin-blur
+    display: block;
+  .ant-spin-container:before
+    display: none;
+  .ant-spin-nested-loading
+    margin: 0
+    padding: 0
+  .ant-spin-nested-loading > div > .ant-spin
+    position: absolute;
+    height: 48px;
+    top: 56px;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    bottom: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  .ant-spin-nested-loading > div > .ant-spin > i
+    position: static;
+    margin: 0
+  .ant-table-placeholder
+    position: static;
+    margin: 0
+    padding: 0
+    height: 48px
+    border-top: 1px solid #f0f1f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  .ant-table-tbody tr:first-child td
+    padding-top: 16px
+    border-top: 1px solid #f0f1f3;
+
+
+//
+.ant-table-wrapper .ant-table-thead tr th
+  min-width: 20px

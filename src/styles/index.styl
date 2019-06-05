@@ -1,0 +1,801 @@
+@font-face {
+    font-family: 'TT Norms';
+    src: url('../fonts/TTNorms-Medium.eot');
+    src: url('../fonts/TTNorms-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/TTNorms-Medium.woff2') format('woff2'),
+        url('../fonts/TTNorms-Medium.woff') format('woff'),
+        url('../fonts/TTNorms-Medium.ttf') format('truetype'),
+        url('../fonts/TTNorms-Medium.svg#TTNorms-Medium') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Norms';
+    src: url('../fonts/TTNorms-Regular.eot');
+    src: url('../fonts/TTNorms-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/TTNorms-Regular.woff2') format('woff2'),
+        url('../fonts/TTNorms-Regular.woff') format('woff'),
+        url('../fonts/TTNorms-Regular.ttf') format('truetype'),
+        url('../fonts/TTNorms-Regular.svg#TTNorms-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import "./normalize.styl"
+@import "./antd.styl"
+@import "./flexboxgrid.styl"
+
+// colors
+$color = #515967
+$color-light = #7C828F
+
+$green = #67CD17
+$green-light = #E2F5D2
+$orange = #FFA820
+$orange-light = #FFEED4
+$red = #FF6D7F
+$red-light = #FFF1F3
+
+// colors classes
+.color__light
+  color: $color_light
+
+
+$font =  "TT Norms", sans-serif;
+
+body
+  background-color: #FCFCFD
+  color: $color
+  font: 14px/20px $font
+  padding: 0
+  margin: 0
+  //text-rendering: optimizeLegibility
+  //-webkit-font-smoothing: antialiased
+
+//
+
+// common
+.flex
+  display: flex;
+
+.flex-center
+  align-items: center;
+
+.pointer
+  cursor: pointer;
+
+.ellipsis
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+a
+  text-decoration: none !important
+
+p
+  margin-bottom: 16px
+  line-height: 20px !important
+
+::placeholder
+  color: $color-light
+
+h3
+  color: #272F3E
+  font-size: 16px
+  font-weight: bold;
+  margin-bottom: 24px
+  line-height: 24px
+
+h4
+  font-size: 13px;
+  color: #7C828F;
+  line-height: 16px;
+  margin-bottom: 8px
+
+*
+  font-family: 'TT Norms';
+  outline: 0 !important
+
+
+// functions
+shadow()
+  box-shadow: 0px 0px 16px rgba(115, 130, 156, 0.03), 0px 2px 8px rgba(115, 130, 156, 0.03);
+
+borderRadius()
+  border-radius: 4px
+
+transition()
+  transition: box-shadow, background .2s
+
+html,
+body,
+#root,
+#root > div
+  height:100%
+  min-height:100%
+
+$sidebarWidth = 200px
+
+// helpers
+.__center
+  height: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  shadow()
+  border-radius: 6px
+  &.transparent
+    background-color: transparent
+    border-radius: none
+    box-shadow: none
+
+
+
+// layout
+.wrapper
+  min-height:100%
+  position: relative;
+  padding: 0 72px
+
+.container
+  width:auto!important;
+  margin:0 auto;
+  padding:0 40px;
+  box-sizing:border-box
+
+
+// header
+header,
+.sidebar__header
+  height: 100px
+  min-height: 100px
+  // background-color: #ff000014
+  display: flex;
+  align-items: center;
+
+header
+  > div
+    margin-right: 24px
+
+.h__sidebar-container
+  width: $sidebarWidth
+
+.h__title
+  margin-right: auto;
+  font-size: 18px
+  font-weight: bold
+  color: #272F3E
+  line-height: 24px
+
+.h__separator
+  width: 1px
+  height: 16px
+  background-color: #E8EAED
+
+.h__user
+  align-items: center;
+  margin-right: 0
+
+.h__user-avatar
+  background-size: cover;
+  background-size: cover;
+  background-position: center;
+  width: 34px
+  height: @width
+  line-height: @width
+  background-color: #4981ff;
+  border-radius: 100%;
+  margin-left: 16px;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+
+// sidebar
+.sidebar
+  position: fixed
+  width: $sidebarWidth
+  overflow-y: scroll;
+  top: 0
+  bottom: 0;
+  z-index: 9;
+  // background-color: #ffff002e;
+  padding: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+
+.sidebar__menu
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-bottom: auto;
+  li
+    margin-bottom: 14px
+    a
+      display: flex;
+      line-height: 24px;
+      align-items: center;
+      color: $color-light
+      text-decoration: none !important
+      &.active
+        color: #272f3e
+    i
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-right: 12px
+      svg
+        //margin-right: 12px
+
+.sidebar__menu li a
+  position: relative;
+  span
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #ff6d7f;
+    border-radius: 15px;
+    left: 12px
+    top: 2px;
+    border: 1px solid #fff;
+    box-sizing: content-box;
+
+.sidebar__menu li a[href="/tickets"] span
+  left: 16px;
+
+.sidebar__copyright
+  font-size: 12px
+  color: $color-light
+
+.content
+  border-left: $sidebarWidth solid transparent;
+  padding: 0
+  height: 100%
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+.content__inner
+  display: flex;
+  flex-direction: column;
+  flex: 1
+  padding-bottom: 32px
+  .content__inner
+    padding-bottom: 0
+
+.content__inner-flex
+  flex: 1
+
+.block
+  padding: 16px 24px
+  background-color: #fff
+  border-radius: 6px
+  box-shadow: 0px 0px 16px rgba(115, 130, 156, 0.02), 0px 2px 8px rgba(115, 130, 156, 0.04);
+  margin-bottom: 16px;
+
+.block__scroll
+  overflow-y: scroll;
+  height: 180px;
+  border-top: 1px solid #f0f1f3;
+  margin: -8px -24px -16px -24px;
+  padding: 24px 24px 0 24px;
+
+.block-scroll
+  //height: 100%
+  font-size: 13px
+
+.block-scroll-inner
+  border-top: 1px solid #f0f1f3;
+  margin: 16px -24px -16px -24px;
+  padding: 16px 24px 0 24px;
+  height: 209px
+  overflow-y: scroll;
+
+.content_text
+  ul
+  ol
+    margin: 0 0 16px 0;
+    padding: 0 0 0 16px;
+  > *
+    &:last-child
+      margin-bottom: 0
+
+// tabs
+.tabs
+  border-bottom: 1px solid #E8EAED;
+  margin-bottom: 24px
+  padding-bottom: 16px
+  span
+    height: 16px;
+    width: 1px;
+    background-color: #e8eaed;
+    display: inline-block;
+    margin-right: 32px;
+    transform: translateY(3px);
+  a
+    margin-right: 32px
+    color: #7C828F
+    position: relative;
+    display: inline-block;
+    &:after
+      content: ''
+      position: absolute;
+      left: 0
+      right: 0
+      bottom: -17px
+      height: 2px
+    &.active
+      color: #272F3E
+      &:after
+        background-color: #538FFF
+
+// input
+.ant-input
+.ant-input-number
+.ant-select-selection
+.DateRangePickerInput
+  height: 40px;
+  padding: 0 16px;
+  background-color: transparent
+  border: 1px solid #E8EAED !important
+  border-radius: $borderRadius
+  box-sizing: border-box;
+  outline: 0
+  transition()
+  position: relative;
+  font-size: 13px
+  color: $color-light
+  &:hover
+  &:focus
+    shadow()
+    border-color: #E8EAED
+
+.has-error
+  .ant-input
+  .ant-input-number
+  .ant-select-selection
+    border-color: #FF8A99
+    background-color: #FFF1F3
+
+.ant-input-disabled
+  background-color: #f5f5f5;
+  opacity: 1;
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.25);
+
+// InputNumber
+.ant-input-number {
+  position: relative;
+  background-image: none;
+  width: 90px;
+  padding: 0
+}
+
+
+.ant-input-number-handler {
+  text-align: center;
+  line-height: 0;
+  height: 50%;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.45);
+  position: relative;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  display: block;
+  width: 100%;
+  font-weight: bold;
+}
+
+.ant-input-number-handler:hover .ant-input-number-handler-up-inner,
+.ant-input-number-handler:hover .ant-input-number-handler-down-inner {
+  color: #40a9ff;
+}
+.ant-input-number-handler-up-inner,
+.ant-input-number-handler-down-inner {
+  font-style: normal;
+  vertical-align: -0.125em;
+  text-align: center;
+  text-transform: none;
+  line-height: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 12px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  display: inline-block;
+  font-size: 12px;
+  font-size: 7px \9;
+  -webkit-transform: scale(0.58333333) rotate(0deg);
+      -ms-transform: scale(0.58333333) rotate(0deg);
+          transform: scale(0.58333333) rotate(0deg);
+  right: 4px;
+  color: rgba(0, 0, 0, 0.45);
+}
+.ant-input-number-handler-up-inner > *,
+.ant-input-number-handler-down-inner > * {
+  line-height: 1;
+}
+.ant-input-number-handler-up-inner svg,
+.ant-input-number-handler-down-inner svg {
+  display: inline-block;
+}
+.ant-input-number-handler-up-inner:before,
+.ant-input-number-handler-down-inner:before {
+  display: none;
+}
+.ant-input-number-handler-up-inner .ant-input-number-handler-up-inner-icon,
+.ant-input-number-handler-up-inner .ant-input-number-handler-down-inner-icon,
+.ant-input-number-handler-down-inner .ant-input-number-handler-up-inner-icon,
+.ant-input-number-handler-down-inner .ant-input-number-handler-down-inner-icon {
+  display: block;
+}
+
+
+
+.ant-input-number-input
+  width: calc(100% - 22px);
+  padding-right: 0;
+  padding-left: 12px;
+  box-sizing: border-box;
+  height: 38px;
+  border: 0;
+  border-radius: $borderRadius
+  outline: 0
+
+.ant-input-number-handler-wrap {
+  border-left: 1px solid #d9d9d9;
+  width: 22px;
+  height: 100%;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 1;
+  border-radius: 0 4px 4px 0;
+}
+
+.ant-input-number-handler-up {
+  cursor: pointer;
+}
+.ant-input-number-handler-up-inner {
+  top: 50%;
+  margin-top: -5px;
+  text-align: center;
+}
+
+.ant-input-number-handler-down {
+  border-top: 1px solid #d9d9d9;
+  top: 0;
+  cursor: pointer;
+}
+.ant-input-number-handler-down-inner {
+  top: 50%;
+  margin-top: -6px;
+  text-align: center;
+}
+
+
+// antd override
+.ant-modal-body
+  padding: 24px 32px
+  line-height: 16px
+  h4
+    margin-bottom: 8px
+
+.ant-popover-inner-content
+  padding: 8px 16px
+  ul
+    margin: 0
+    padding: 0
+    list-style: none;
+    li
+      a
+        display: block;
+        line-height: 32px
+        color: $color-light
+        &:hover
+          color: #4989FF
+
+
+// filters
+.filter
+  margin-bottom: 24px
+  .ant-form-explain
+    display: none;
+  form
+    display:flex
+    align-items: flex-start;
+    > div
+      margin-right: 16px
+  h4
+    font-size: 12px
+    line-height: 16px
+    margin-bottom: 8px
+    color: $color-light
+    font-weight: normal;
+  .ant-form-item
+    margin-bottom: 0
+    width: 150px
+    &.filter__field-created_at
+      width: 220px;
+
+.filter__expanded
+  form
+    display: block;
+    > .flex
+      > *
+        margin-right: 16px
+
+.filter__filters-expanded
+  border-top: 1px dashed #DEE2EA
+  padding-top: 24px
+  margin-top: 24px;
+  margin-right: 0 !important;
+  display: none
+  &.filter__filters-expanded-open
+    display: block;
+  > div
+    display: flex;
+    margin: 0 -8px 16px -8px
+    &:last-child
+      margin-bottom: 0
+    > div
+      width: 12.5% !important
+      max-width: @width
+      min-width: @width
+      padding: 0 8px
+      margin: 0
+
+.filter__with-btn
+  display: flex;
+  form + div
+    margin-left: auto;
+
+// inputs errors
+.has-error
+  .ant-input
+  .ant-select-selection
+    border-color: #FF9DA9 !important
+    background-color: #FFEDEF
+    &:focus
+      box-shadow: none
+
+// tickets
+// tickets
+.tickets
+  > .row
+    height: 100%
+  .form__item-status
+    width: 300px
+
+.tickets__list
+  height: 100%
+  shadow()
+  background-color: #fff
+  border-radius: 6px
+  overflow-y: scroll;
+  padding: 0 16px;
+
+.tickets__list-item
+  display: flex;
+  align-items: center;
+  padding: 16px
+  border-radius: 6px
+  color: $color
+  transition()
+  &:hover
+    color: inherit;
+    background-color: #F8F9FB
+  &.active
+    background-color: #F3F5F7
+  &:first-child
+    margin-top: 16px
+  &:last-child
+    margin-bottom: 16px
+
+.tickets__list-item-inner
+  width: calc(100% - 56px);
+
+.tickets__list-item-name
+  color: #272F3E
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+
+.tickets__list-item-info
+  color: $color-light
+  font-size: 13px
+
+.tickets__list-item-icon
+  width: 40px
+  height: @width
+  min-width: @width
+  border-radius: 100%
+  background-color: #C7CBD4
+  margin-right: 16px
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg
+    pointer-events: none;
+    path
+      fill: #fff !important
+      stroke: #fff !important
+  &.tech_problem
+    background-color: #75C0FF
+  &.financial
+    background-color: #64BD1C
+    svg
+      path
+        stroke: #64BD1C !important
+  &.info
+    background-color: #C389FF
+    svg
+      *
+        fill: #fff
+        stroke: #fff
+      .btu__icon-nostroke
+        fill: #C389FF
+  &.suggestion
+    background-color: #FFBD58
+  &.archived
+    background-color: #C7CBD4 !important
+  span
+    width: 6px
+    height: @width
+    background-color: #FF6D7F
+    border-radius: 100%
+    border: 2px solid #fff
+    position: absolute;
+    box-sizing: content-box;
+    top: 1px;
+    right: 1px;
+    transition()
+
+.active .tickets__list-item-icon span
+  border-color: #F3F5F7
+
+.tickets__list-item:hover .tickets__list-item-icon span
+  border-color: #F3F5F7
+
+.ticket
+  border-radius: 6px
+  shadow()
+  background-color: #fff
+  height: 100%;
+  overflow: hidden;
+  display: flex
+  flex-direction: column;
+
+.ticket__header
+  border-bottom: 1px solid #F0F1F3
+  height: 48px
+  line-height: 48px
+  padding: 0 24px
+  display: flex;
+  > div
+    margin-left: auto;
+
+.ticket__messages
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+
+.ticket__message
+  //display: flex;
+  //flex-direction: row;
+  //overflow: hidden;
+  margin-bottom: 16px
+  padding: 0 24px
+  &:first-child
+    margin-top: 24px
+  .flex
+    align-items: flex-start;
+
+.ticket__message-avatar-holder
+  width: 40px
+  min-width: 40px
+  text-align: center;
+  margin-right: 8px
+  > div
+    width: 40px
+    height: 40px
+    background-color: #C7CBD4
+    border-radius: 100%
+    background-size: cover;
+    background-position: center;
+  > span
+    font-size: 12px
+    color: $color-light
+    margin-top: 8px
+    display: block;
+    line-height: 16px;
+
+.ticket__message-text
+  border-radius: 20px
+  padding: 9px 24px
+  border: 1px solid #E8EAED
+  max-width: 80%;
+
+.ticket__message-self
+  .flex
+    flex-direction: row-reverse;
+  .ticket__message-avatar-holder
+    margin-right: 0
+    margin-left: 8px
+  .ticket__message-text
+    background-color: #F3F5F7
+    border-color: #F3F5F7
+
+.ticket__message-form
+  height: 64px
+  padding: 0 24px
+  .form__item-text
+    width: 100%
+    margin-right: 8px
+
+.tickets
+  .block
+    height: 100%
+    flex-direction: column;
+    align-items: center
+    justify-content: center;
+    display: flex;
+
+.tickets__empty
+  text-align: center;
+  color: $color-light
+  img
+    width: 50px
+    margin-bottom: 24px
+
+.tickets__list-placeholder
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: $color-light
+  img
+    width: 50px
+    margin-bottom: 24px
+
+.widget__tickets-add
+  width: 500px
+  overflow-y: scroll;
+
+// common
+.ant-form-item-with-help
+  margin-bottom: 26px
+
+form textarea.ant-input,
+textarea
+  padding-top: 10px
+  padding-bottom: 10px
+
+
+@import "../components/Badge/index.styl"
+@import "../components/Button/index.styl"
+@import "../components/Table/index.styl"
+@import "../components/Select/index.styl"
+@import "../components/RemoteMultiSelect/index.styl"
+@import "../components/Icons/index.styl"
+@import "../components/RangePicker/index.styl"

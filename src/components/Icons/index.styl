@@ -1,0 +1,44 @@
+// icons
+.btu__icon
+  > *
+    transition: all .3s
+
+.active .btu__icon,
+.btu__icon:hover,
+.sidebar__menu li a:hover .btu__icon,
+.btn-group .btu__button:hover .btu__icon
+  > *
+    fill: #D2E2FF
+    stroke: #77A7FF
+  .btu__icon-nostroke
+    fill: #77A7FF
+
+.btu__icon-nofill
+  fill: none !important
+
+.btu__icon-nostroke
+  stroke: none !important
+
+.btu__icon-info
+  &:hover
+    > *
+      fill: #F7EFFF
+      stroke: #D3A9FF
+    .btu__icon-nostroke
+      fill: #D3A9FF
+
+.btu__icon-delete
+  &:hover
+    > *
+      fill: #FFEDEF
+      stroke: #FF9DA9
+    .btu__icon-nostroke
+      fill: #FF9DA9
+
+.btu__icon-settings
+  &:hover
+    > *
+      fill: #FFF6E9
+      stroke: #FFCF84
+    .btu__icon-nostroke
+      fill: #FFCF84
