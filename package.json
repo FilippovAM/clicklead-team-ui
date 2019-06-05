@@ -4,7 +4,10 @@
   "description": "",
   "author": "clicklead",
   "license": "MIT",
-  "repository": "https://github.com/FilippovAM/clicklead-team-ui",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/FilippovAM/clicklead-team-ui"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
