@@ -4,7 +4,7 @@
   "description": "",
   "author": "clicklead",
   "license": "MIT",
-  "repository": "but1head/bro-team-ui",
+  "repository": "https://github.com/FilippovAM/clicklead-team-ui",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
