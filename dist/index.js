@@ -18077,7 +18077,7 @@ var RemoteMultiSelect = function (_Component) {
             { className: 'mselect__value-placeholder' },
             '\u0412\u0441\u0435'
           ),
-          React__default.createElement(antd.Icon, { type: 'down' })
+          React__default.createElement(antd.Icon, { className: 'mselect__value-icon', type: 'down' })
         ),
         isOpen && React__default.createElement(
           'div',

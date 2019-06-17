@@ -224,8 +224,7 @@ export default class RemoteMultiSelect extends Component {
       <div className={className} ref={this.setWrapperRef}>
         <div className='mselect__value' onClick={this._toggle}>
           {value.length ? `Выбрано ${value.length} шт.` : <div className='mselect__value-placeholder'>Все</div>}
-          {/*{Icons.ArrowDown}*/}
-          <Icon type="down"/>
+          <Icon className="mselect__value-icon" type="down"/>
         </div>
         {isOpen && (
           <div className='mselect__dropdown'>
