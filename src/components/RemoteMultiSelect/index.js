@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Icons from '../Icons'
 import _ from 'lodash'
+import {Icon} from 'antd';
 
 export default class RemoteMultiSelect extends Component {
   constructor(props) {
@@ -223,7 +224,8 @@ export default class RemoteMultiSelect extends Component {
       <div className={className} ref={this.setWrapperRef}>
         <div className='mselect__value' onClick={this._toggle}>
           {value.length ? `Выбрано ${value.length} шт.` : <div className='mselect__value-placeholder'>Все</div>}
-          {Icons.ArrowDown}
+          {/*{Icons.ArrowDown}*/}
+          <Icon type="down"/>
         </div>
         {isOpen && (
           <div className='mselect__dropdown'>
