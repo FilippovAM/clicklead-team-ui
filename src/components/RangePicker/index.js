@@ -83,7 +83,7 @@ class RangePicker extends Component {
 
         onFocusChange={focusedInput => this.setState({ focusedInput })}
         hideKeyboardShortcutsPanel
-        customArrowIcon={(<span />)}
+        customArrowIcon={<div>&#8212;</div>}
         showClearDates={showClearDates}
         firstDayOfWeek={1}
         transitionDuration={0}
