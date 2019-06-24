@@ -143,7 +143,14 @@ export default class RemoteMultiSelect extends Component {
   }
 
   _onSelect = (e) => {
-    const id = parseInt(e.target.value)
+    const {changeOnSelect, onChange} = this.props;
+    const inputValue = e.target.value;
+
+    let id = parseInt(inputValue);
+    if (Number.isNaN(id)) {
+      id = inputValue;
+    }
+
     const name = e.target.dataset.name
     let { value, valueData } = this.state
 
@@ -162,6 +169,10 @@ export default class RemoteMultiSelect extends Component {
     if (search && search.value) {
       search.value = ''
       this.fetch()
+    }
+
+    if (changeOnSelect) {
+      onChange(value);
     }
   }
 

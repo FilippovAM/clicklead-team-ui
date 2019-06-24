@@ -17936,7 +17936,17 @@ var RemoteMultiSelect = function (_Component) {
     };
 
     _this._onSelect = function (e) {
-      var id = parseInt(e.target.value);
+      var _this$props4 = _this.props,
+          changeOnSelect = _this$props4.changeOnSelect,
+          onChange = _this$props4.onChange;
+
+      var inputValue = e.target.value;
+
+      var id = parseInt(inputValue);
+      if (Number.isNaN(id)) {
+        id = inputValue;
+      }
+
       var name = e.target.dataset.name;
       var _this$state3 = _this.state,
           value = _this$state3.value,
@@ -17960,6 +17970,10 @@ var RemoteMultiSelect = function (_Component) {
       if (search && search.value) {
         search.value = '';
         _this.fetch();
+      }
+
+      if (changeOnSelect) {
+        onChange(value);
       }
     };
 
