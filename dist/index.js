@@ -7,7 +7,6 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = require('react');
 var React__default = _interopDefault(React);
 var antd = require('antd');
-require('axios');
 var _propTypes = _interopDefault(require('prop-types'));
 var ReactDOM = _interopDefault(require('react-dom'));
 
@@ -17795,326 +17794,320 @@ var lodash = createCommonjsModule(function (module, exports) {
 }.call(commonjsGlobal));
 });
 
+var EMPTY_VALUE = '{%empty%}';
+
 var RemoteMultiSelect = function (_Component) {
-  inherits(RemoteMultiSelect, _Component);
+    inherits(RemoteMultiSelect, _Component);
 
-  function RemoteMultiSelect(props) {
-    classCallCheck(this, RemoteMultiSelect);
+    function RemoteMultiSelect(props) {
+        classCallCheck(this, RemoteMultiSelect);
 
-    var _this = possibleConstructorReturn(this, (RemoteMultiSelect.__proto__ || Object.getPrototypeOf(RemoteMultiSelect)).call(this, props));
+        var _this = possibleConstructorReturn(this, (RemoteMultiSelect.__proto__ || Object.getPrototypeOf(RemoteMultiSelect)).call(this, props));
 
-    _this.componentDidMount = function () {
-      _this.fetchValue();
-      document.addEventListener('mousedown', _this.handleClickOutside);
-    };
+        _this.componentDidMount = function () {
+            _this.fetchValue();
+            document.addEventListener('mousedown', _this.handleClickOutside);
+        };
 
-    _this.componentWillUnmount = function () {
-      document.removeEventListener('mousedown', _this.handleClickOutside);
-    };
+        _this.componentWillUnmount = function () {
+            document.removeEventListener('mousedown', _this.handleClickOutside);
+        };
 
-    _this.componentDidUpdate = function (prevProps) {
-      var _this$state = _this.state,
-          value = _this$state.value,
-          data = _this$state.data;
-      var _this$props = _this.props,
-          disabled = _this$props.disabled,
-          params = _this$props.params;
+        _this.componentDidUpdate = function (prevProps) {
+            var _this$state = _this.state,
+                value = _this$state.value,
+                data = _this$state.data;
+            var _this$props = _this.props,
+                disabled = _this$props.disabled,
+                params = _this$props.params;
 
-      if (_this.props.hasOwnProperty('params')) {
-        var paramsChanged = !lodash.isEqual(params, prevProps.params);
-        if (paramsChanged && !disabled) {
-          // родитель изменен и селект стал доступен
-          _this.fetchValue();
-          _this.fetch();
-        } else if (paramsChanged) {
-          // родитель изменен и пуст, заблокирован селект
-          console.log('params changed, disable');
-          _this.setState({ value: [], valueData: [], data: [] });
-        }
-      }
-    };
+            if (_this.props.hasOwnProperty('params')) {
+                var paramsChanged = !lodash.isEqual(params, prevProps.params);
+                if (paramsChanged && !disabled) {
+                    // родитель изменен и селект стал доступен
+                    _this.fetchValue();
+                    _this.fetch();
+                } else if (paramsChanged) {
+                    // родитель изменен и пуст, заблокирован селект
+                    console.log('params changed, disable');
+                    _this.setState({ value: [], valueData: [], data: [] });
+                }
+            }
+        };
 
-    _this.setWrapperRef = function (node) {
-      _this.wrapperRef = node;
-    };
+        _this.setWrapperRef = function (node) {
+            _this.wrapperRef = node;
+        };
 
-    _this.setSearchRef = function (node) {
-      _this.searchRef = node;
-    };
+        _this.setSearchRef = function (node) {
+            _this.searchRef = node;
+        };
 
-    _this.handleClickOutside = function (event) {
-      var _this$state2 = _this.state,
-          isOpen = _this$state2.isOpen,
-          value = _this$state2.value;
+        _this.handleClickOutside = function (event) {
+            var _this$state2 = _this.state,
+                isOpen = _this$state2.isOpen,
+                value = _this$state2.value;
 
-      if (isOpen && _this.wrapperRef && !_this.wrapperRef.contains(event.target)) {
-        var search_value = _this.searchRef && _this.searchRef.value;
-        if (search_value) {
-          _this.searchRef.value = '';
-          _this.fetch();
-        }
-        _this.setState({ isOpen: false });
-        _this.props.onChange(value);
-      }
-    };
+            if (isOpen && _this.wrapperRef && !_this.wrapperRef.contains(event.target)) {
+                var search_value = _this.searchRef && _this.searchRef.value;
+                if (search_value) {
+                    _this.searchRef.value = '';
+                    _this.fetch();
+                }
+                _this.setState({ isOpen: false });
+                _this.props.onChange(value);
+            }
+        };
 
-    _this.fetchValue = function () {
-      var _this$props2 = _this.props,
-          value = _this$props2.value,
-          target = _this$props2.target,
-          filter = _this$props2.filter,
-          options = _this$props2.params;
+        _this.fetchValue = function () {
+            var _this$props2 = _this.props,
+                value = _this$props2.value,
+                target = _this$props2.target,
+                filter = _this$props2.filter,
+                options = _this$props2.params;
 
-      if (!value || !value.length) return;
-      var params = {
-        'q[id][in]': value.join(','),
-        'fields': 'id,name'
+            if (!value || !value.length) return;
+            var params = {
+                'q[id][in]': value.join(','),
+                'fields': 'id,name'
 
-        // params
-      };if (options && (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
-        Object.keys(options).forEach(function (key) {
-          params[key] = Array.isArray(options[key]) ? options[key].join(',') : options[key];
-        });
-      }
+                // params
+            };if (options && (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+                Object.keys(options).forEach(function (key) {
+                    params[key] = Array.isArray(options[key]) ? options[key].join(',') : options[key];
+                });
+            }
 
-      var url = filter && 'v1/statistic-light-filters/' + filter || target;
-      window.api.get(url, { params: params }).then(function (response) {
-        _this.setState({ valueData: response.data, value: response.data.map(function (item) {
-            return item.id;
-          }), isLoading: false });
-      }).catch(function (e) {
-        _this.setState({ isLoading: false });
-      });
-    };
+            var url = filter && 'v1/statistic-light-filters/' + filter || target;
+            window.api.get(url, { params: params }).then(function (response) {
+                _this.setState({ valueData: response.data, value: value, isLoading: false });
+            }).catch(function (e) {
+                _this.setState({ isLoading: false });
+            });
+        };
 
-    _this.fetch = function (search_value) {
-      var _this$props3 = _this.props,
-          filter = _this$props3.filter,
-          target = _this$props3.target,
-          options = _this$props3.params;
-      var isLoading = _this.state.isLoading;
+        _this.fetch = function (search_value) {
+            var _this$props3 = _this.props,
+                filter = _this$props3.filter,
+                target = _this$props3.target,
+                options = _this$props3.params;
+            var isLoading = _this.state.isLoading;
 
-      if (isLoading) return;
-      _this.setState({ isLoading: true });
+            if (isLoading) return;
+            _this.setState({ isLoading: true });
 
-      var params = {
-        'fields': 'id,name'
+            var params = {
+                'fields': 'id,name'
 
-        // search
-      };if (search_value) {
-        if (search_value.charAt(0) === '#') {
-          params['q[id][equal]'] = search_value.replace('#', '');
-        } else {
-          params['q[name][like]'] = search_value;
-        }
-      }
+                // search
+            };if (search_value) {
+                if (search_value.charAt(0) === '#') {
+                    params['q[id][equal]'] = search_value.replace('#', '');
+                } else {
+                    params['q[name][like]'] = search_value;
+                }
+            }
 
-      // params
-      if (options && (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
-        Object.keys(options).forEach(function (key) {
-          params[key] = Array.isArray(options[key]) ? options[key].join(',') : options[key];
-        });
-      }
+            // params
+            if (options && (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+                Object.keys(options).forEach(function (key) {
+                    params[key] = Array.isArray(options[key]) ? options[key].join(',') : options[key];
+                });
+            }
 
-      var url = filter && 'v1/statistic-light-filters/' + filter || target;
-      window.api.get(url, { params: params }).then(function (response) {
-        _this.setState({ data: response.data, isLoading: false });
-      }).catch(function (e) {
-        _this.setState({ isLoading: false });
-      });
-    };
+            var url = filter && 'v1/statistic-light-filters/' + filter || target;
+            window.api.get(url, { params: params }).then(function (response) {
+                // sort items
+                var data = response.data.sort(function (itemA, itemB) {
+                    return itemA.id - itemB.id;
+                });
 
-    _this._onSearch = function () {
-      var data = _this.state.data;
+                // region ---- move empty value to first in data
+                var emptyItem = data.find(function (item) {
+                    return item.id === EMPTY_VALUE;
+                });
+                if (emptyItem) {
+                    var emptyItemIndex = data.findIndex(function (item) {
+                        return item.id === EMPTY_VALUE;
+                    });
+                    data.splice(emptyItemIndex, 1);
+                    data.unshift(emptyItem);
+                }
+                // ---- endregion
 
-      var tmp = _this.searchRef.value;
-      if (!tmp || tmp === ' ') {
-        // if clear input
-        _this.searchRef.value = '';
-        _this.fetch();
-      } else {
-        var search_value = tmp.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); // trim start & end
-        if (search_value) {
-          _this.fetch(search_value);
-        } else {
-          _this.searchRef.value = '';
-        }
-      }
-    };
+                _this.setState({ data: data, isLoading: false });
+            }).catch(function (e) {
+                _this.setState({ isLoading: false });
+            });
+        };
 
-    _this._onSelect = function (e) {
-      var _this$props4 = _this.props,
-          changeOnSelect = _this$props4.changeOnSelect,
-          onChange = _this$props4.onChange;
+        _this._onSearch = function () {
+            var data = _this.state.data;
 
-      var inputValue = e.target.value;
+            var tmp = _this.searchRef.value;
+            if (!tmp || tmp === ' ') {
+                // if clear input
+                _this.searchRef.value = '';
+                _this.fetch();
+            } else {
+                var search_value = tmp.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); // trim start & end
+                if (search_value) {
+                    _this.fetch(search_value);
+                } else {
+                    _this.searchRef.value = '';
+                }
+            }
+        };
 
-      var id = parseInt(inputValue);
-      if (Number.isNaN(id)) {
-        id = inputValue;
-      }
+        _this._onSelect = function (e) {
+            var _this$props4 = _this.props,
+                changeOnSelect = _this$props4.changeOnSelect,
+                onChange = _this$props4.onChange;
 
-      var name = e.target.dataset.name;
-      var _this$state3 = _this.state,
-          value = _this$state3.value,
-          valueData = _this$state3.valueData;
+            var inputValue = e.target.value;
+
+            var name = e.target.dataset.name;
+            var _this$state3 = _this.state,
+                value = _this$state3.value,
+                valueData = _this$state3.valueData;
 
 
-      if (value.includes(id)) {
-        value.splice(value.indexOf(id), 1);
-        valueData = valueData.filter(function (item) {
-          return item.id !== id;
-        });
-      } else {
-        value.push(id);
-        valueData.push({ id: id, name: name });
-      }
+            if (value.includes(inputValue)) {
+                value.splice(value.indexOf(inputValue), 1);
+                valueData = valueData.filter(function (item) {
+                    return item.id !== inputValue;
+                });
+            } else {
+                value.push(inputValue);
+                valueData.push({ inputValue: inputValue, name: name });
+            }
 
-      _this.setState({ value: value, valueData: valueData });
+            _this.setState({ value: value, valueData: valueData });
 
-      // clear search
-      var search = _this.searchRef;
-      if (search && search.value) {
-        search.value = '';
-        _this.fetch();
-      }
+            // clear search
+            var search = _this.searchRef;
+            if (search && search.value) {
+                search.value = '';
+                _this.fetch();
+            }
 
-      if (changeOnSelect) {
-        onChange(value);
-      }
-    };
+            if (changeOnSelect) {
+                onChange(value);
+            }
+        };
 
-    _this._renderValues = function () {
-      var _this$state4 = _this.state,
-          value = _this$state4.value,
-          valueData = _this$state4.valueData,
-          data = _this$state4.data;
+        _this._renderValues = function () {
+            var _this$state4 = _this.state,
+                value = _this$state4.value,
+                valueData = _this$state4.valueData,
+                data = _this$state4.data;
 
-      var search_value = _this.searchRef && _this.searchRef.value || false;
-      var values = [];
+            var search_value = _this.searchRef && _this.searchRef.value || false;
+            var values = [];
 
-      if (!search_value) {
-        valueData.forEach(function (item) {
-          values.push(React__default.createElement(
-            'li',
-            { key: item.id },
-            React__default.createElement(
-              'label',
-              null,
-              React__default.createElement('input', { type: 'checkbox', value: item.id, 'data-name': item.name, onChange: _this._onSelect, checked: true }),
-              React__default.createElement(
-                'span',
-                null,
-                item.id,
-                '.'
-              ),
-              item.name
-            )
-          ));
-        });
-      }
+            data.forEach(function (item) {
+                var checked = !!value.includes(String(item.id));
 
-      data.forEach(function (item) {
-        if (!search_value && value.includes(item.id)) return;
-        var checked = value.includes(item.id);
-        values.push(React__default.createElement(
-          'li',
-          { key: item.id },
-          React__default.createElement(
-            'label',
-            null,
-            React__default.createElement('input', { type: 'checkbox', value: item.id, 'data-name': item.name, onChange: _this._onSelect, checked: checked }),
-            React__default.createElement(
-              'span',
-              null,
-              item.id,
-              '.'
-            ),
-            item.name
-          )
-        ));
-      });
+                values.push(React__default.createElement(
+                    'li',
+                    { key: item.id },
+                    React__default.createElement(
+                        'label',
+                        null,
+                        React__default.createElement('input', { type: 'checkbox', value: item.id, 'data-name': item.name, onChange: _this._onSelect,
+                            checked: checked }),
+                        React__default.createElement(
+                            'span',
+                            null,
+                            item.id,
+                            '.'
+                        ),
+                        item.name
+                    )
+                ));
+            });
 
-      return values;
-    };
+            return values;
+        };
 
-    _this._toggle = function () {
-      var _this$state5 = _this.state,
-          value = _this$state5.value,
-          isOpen = _this$state5.isOpen,
-          data = _this$state5.data;
+        _this._toggle = function () {
+            var _this$state5 = _this.state,
+                value = _this$state5.value,
+                isOpen = _this$state5.isOpen,
+                data = _this$state5.data;
 
-      _this.setState({ isOpen: !isOpen });
-      if (!isOpen && data.length === 0) _this.fetch();
-      if (isOpen) {
-        _this.props.onChange(value);
-      }
-    };
+            _this.setState({ isOpen: !isOpen });
+            if (!isOpen && data.length === 0) _this.fetch();
+            if (isOpen) {
+                _this.props.onChange(value);
+            }
+        };
 
-    _this.state = {
-      isLoading: false,
-      isOpen: false,
-      value: [],
-      valueData: [],
-      data: []
-    };
-    _this._onSearch = lodash.debounce(_this._onSearch, 250);
-    return _this;
-  }
-
-  createClass(RemoteMultiSelect, [{
-    key: 'render',
-    value: function render() {
-      var _state = this.state,
-          value = _state.value,
-          isLoading = _state.isLoading,
-          isOpen = _state.isOpen;
-      var _props = this.props,
-          disabled = _props.disabled,
-          hideIds = _props.hideIds;
-
-      var values = this._renderValues();
-
-      var className = 'mselect';
-      if (isOpen) className += ' mselect-isOpen';
-      if (hideIds) className += ' mselect-hideIds';
-      if (disabled) className += ' mselect-disabled';
-
-      return React__default.createElement(
-        'div',
-        { className: className, ref: this.setWrapperRef },
-        React__default.createElement(
-          'div',
-          { className: 'mselect__value', onClick: this._toggle },
-          value.length ? '\u0412\u044B\u0431\u0440\u0430\u043D\u043E ' + value.length + ' \u0448\u0442.' : React__default.createElement(
-            'div',
-            { className: 'mselect__value-placeholder' },
-            '\u0412\u0441\u0435'
-          ),
-          React__default.createElement(antd.Icon, { className: 'mselect__value-icon', type: 'down' })
-        ),
-        isOpen && React__default.createElement(
-          'div',
-          { className: 'mselect__dropdown' },
-          React__default.createElement('input', { ref: this.setSearchRef, type: 'text', className: 'mselect__dropdown-search', onChange: this._onSearch, placeholder: '\u041F\u043E\u0438\u0441\u043A...' }),
-          React__default.createElement(
-            'ul',
-            { className: 'mselect__dropdown-values' },
-            isLoading ? React__default.createElement(
-              'li',
-              { className: 'mselect__dropdown-values-loading' },
-              '\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430...'
-            ) : values.length ? values : React__default.createElement(
-              'li',
-              { className: 'mselect__dropdown-values-empty' },
-              '\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E'
-            )
-          )
-        )
-      );
+        _this.state = {
+            isLoading: false,
+            isOpen: false,
+            value: [],
+            valueData: [],
+            data: []
+        };
+        _this._onSearch = lodash.debounce(_this._onSearch, 250);
+        return _this;
     }
-  }]);
-  return RemoteMultiSelect;
+
+    createClass(RemoteMultiSelect, [{
+        key: 'render',
+        value: function render() {
+            var _state = this.state,
+                value = _state.value,
+                isLoading = _state.isLoading,
+                isOpen = _state.isOpen;
+            var _props = this.props,
+                disabled = _props.disabled,
+                hideIds = _props.hideIds;
+
+            var values = this._renderValues();
+
+            var className = 'mselect';
+            if (isOpen) className += ' mselect-isOpen';
+            if (hideIds) className += ' mselect-hideIds';
+            if (disabled) className += ' mselect-disabled';
+
+            return React__default.createElement(
+                'div',
+                { className: className, ref: this.setWrapperRef },
+                React__default.createElement(
+                    'div',
+                    { className: 'mselect__value', onClick: this._toggle },
+                    value.length ? '\u0412\u044B\u0431\u0440\u0430\u043D\u043E ' + value.length + ' \u0448\u0442.' : React__default.createElement(
+                        'div',
+                        { className: 'mselect__value-placeholder' },
+                        '\u0412\u0441\u0435'
+                    ),
+                    React__default.createElement(antd.Icon, { className: 'mselect__value-icon', type: 'down' })
+                ),
+                isOpen && React__default.createElement(
+                    'div',
+                    { className: 'mselect__dropdown' },
+                    React__default.createElement('input', { ref: this.setSearchRef, type: 'text', className: 'mselect__dropdown-search',
+                        onChange: this._onSearch, placeholder: '\u041F\u043E\u0438\u0441\u043A...' }),
+                    React__default.createElement(
+                        'ul',
+                        { className: 'mselect__dropdown-values' },
+                        isLoading ? React__default.createElement(
+                            'li',
+                            { className: 'mselect__dropdown-values-loading' },
+                            '\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430...'
+                        ) : values.length ? values : React__default.createElement(
+                            'li',
+                            { className: 'mselect__dropdown-values-empty' },
+                            '\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+    return RemoteMultiSelect;
 }(React.Component);
 
 var moment = createCommonjsModule(function (module, exports) {
@@ -43526,7 +43519,11 @@ var RangePicker = function (_Component) {
           return _this2.setState({ focusedInput: focusedInput });
         },
         hideKeyboardShortcutsPanel: true,
-        customArrowIcon: React__default.createElement('span', null),
+        customArrowIcon: React__default.createElement(
+          'div',
+          null,
+          '\u2014'
+        ),
         showClearDates: showClearDates,
         firstDayOfWeek: 1,
         transitionDuration: 0,
