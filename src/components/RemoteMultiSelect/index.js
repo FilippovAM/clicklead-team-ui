@@ -91,7 +91,8 @@ export default class RemoteMultiSelect extends Component {
 
     fetch = (search_value) => {
         const {filter, target, params: options} = this.props
-        const {isLoading} = this.state
+        const {isLoading} = this.state;
+        let values = this.state.value.slice();
         if (isLoading) return
         this.setState({isLoading: true})
 
@@ -132,7 +133,13 @@ export default class RemoteMultiSelect extends Component {
                 }
                 // ---- endregion
 
-                this.setState({data: data, isLoading: false});
+                if (values) {
+                    values = values.filter((value) => {
+                        return !!data.find((item) => String(item.id) === String(value));
+                    });
+                }
+
+                this.setState({data: data, value: values, isLoading: false});
             })
             .catch(e => {
                 this.setState({isLoading: false})
