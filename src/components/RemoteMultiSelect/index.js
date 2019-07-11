@@ -195,15 +195,15 @@ export default class RemoteMultiSelect extends Component {
         const search_value = this.searchRef && this.searchRef.value || false
         const values = []
 
-        data.forEach(item => {
+        data.forEach((item, index) => {
             const checked = !!value.includes(String(item.id));
 
             values.push(
-                <li key={item.id}>
+                <li key={index}>
                     <label>
                         <input type='checkbox' value={item.id} data-name={item.name} onChange={this._onSelect}
                                checked={checked}/>
-                        <span>{item.id}.</span>
+                        <span>{index}.</span>
                         {item.name}
                     </label>
                 </li>

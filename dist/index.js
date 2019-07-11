@@ -18005,12 +18005,12 @@ var RemoteMultiSelect = function (_Component) {
             var search_value = _this.searchRef && _this.searchRef.value || false;
             var values = [];
 
-            data.forEach(function (item) {
+            data.forEach(function (item, index) {
                 var checked = !!value.includes(String(item.id));
 
                 values.push(React__default.createElement(
                     'li',
-                    { key: item.id },
+                    { key: index },
                     React__default.createElement(
                         'label',
                         null,
@@ -18019,7 +18019,7 @@ var RemoteMultiSelect = function (_Component) {
                         React__default.createElement(
                             'span',
                             null,
-                            item.id,
+                            index,
                             '.'
                         ),
                         item.name
