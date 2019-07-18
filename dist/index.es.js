@@ -17886,6 +17886,7 @@ var RemoteMultiSelect = function (_Component) {
                 options = _this$props3.params;
             var isLoading = _this.state.isLoading;
 
+            var values = _this.state.value.slice();
             if (isLoading) return;
             _this.setState({ isLoading: true });
 
@@ -17928,7 +17929,15 @@ var RemoteMultiSelect = function (_Component) {
                 }
                 // ---- endregion
 
-                _this.setState({ data: data, isLoading: false });
+                if (values) {
+                    values = values.filter(function (value) {
+                        return !!data.find(function (item) {
+                            return String(item.id) === String(value);
+                        });
+                    });
+                }
+
+                _this.setState({ data: data, value: values, isLoading: false });
             }).catch(function (e) {
                 _this.setState({ isLoading: false });
             });
@@ -43487,7 +43496,7 @@ var RangePicker = function (_Component) {
           endDate = _state.endDate;
 
       var showClearDates = this.props.showClearDates || true;
-      return React.createElement(DateRangePicker$1, {
+      return React.createElement(DateRangePicker$1, _extends({}, this.props, {
 
         startDate: startDate,
         startDateId: 'picker_start_' + id,
@@ -43497,12 +43506,10 @@ var RangePicker = function (_Component) {
         endDateId: 'picker_end_' + id,
         endDatePlaceholderText: '\u0414\u043E',
 
-        displayFormat: 'DD.MM.YY',
-        isOutsideRange: function isOutsideRange() {
-          return false;
-        },
+        displayFormat: 'DD.MM.YY'
+        // isOutsideRange={() => false}
 
-        onClose: this.onClose,
+        , onClose: this.onClose,
         onDatesChange: this.onChange,
         focusedInput: this.state.focusedInput,
 
@@ -43526,7 +43533,7 @@ var RangePicker = function (_Component) {
         navPrev: Icons.ArrowLeft,
         navNext: Icons.ArrowRight,
         customCloseIcon: Icons.delete2
-      });
+      }));
     }
   }]);
   return RangePicker;
