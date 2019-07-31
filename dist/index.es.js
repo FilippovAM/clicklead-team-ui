@@ -17848,7 +17848,8 @@ var RemoteMultiSelect = function (_Component) {
                     _this.fetch();
                 }
                 _this.setState({ isOpen: false });
-                if (!lodash.isEqual(_this.props.value, value)) {
+                var isEmptyValue = lodash.isEmpty(_this.props.value) && lodash.isEmpty(value);
+                if (!isEmptyValue && !lodash.isEqual(_this.props.value, value)) {
                     _this.props.onChange(value.slice());
                 }
             }
