@@ -17848,7 +17848,9 @@ var RemoteMultiSelect = function (_Component) {
                     _this.fetch();
                 }
                 _this.setState({ isOpen: false });
-                _this.props.onChange(value);
+                if (!lodash.isEqual(_this.props.value, value)) {
+                    _this.props.onChange(value.slice());
+                }
             }
         };
 

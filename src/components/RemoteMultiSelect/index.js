@@ -57,10 +57,12 @@ export default class RemoteMultiSelect extends Component {
             const search_value = this.searchRef && this.searchRef.value
             if (search_value) {
                 this.searchRef.value = ''
-                this.fetch()
+                this.fetch();
             }
-            this.setState({isOpen: false})
-            this.props.onChange(value)
+            this.setState({isOpen: false});
+            if (!_.isEqual(this.props.value, value)) {
+                this.props.onChange(value.slice());
+            }
         }
     }
 
