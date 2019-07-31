@@ -60,7 +60,8 @@ export default class RemoteMultiSelect extends Component {
                 this.fetch();
             }
             this.setState({isOpen: false});
-            if (!_.isEqual(this.props.value, value)) {
+            const isEmptyValue = _.isEmpty(this.props.value) && _.isEmpty(value);
+            if (!isEmptyValue && !_.isEqual(this.props.value, value)) {
                 this.props.onChange(value.slice());
             }
         }
